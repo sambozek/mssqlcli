@@ -53,5 +53,5 @@ def query(config_file, output, query):
     click.echo(output)
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: nocover
     cli()

@@ -35,7 +35,7 @@ def stringify(obj):
 
 
 def jsonify(obj):
-    formatted_json = json.dumps(stringify(obj), indent=4)
+    formatted_json = json.dumps(stringify({"results": obj}), indent=4)
 
     try:
         from pygments import highlight, lexers, formatters

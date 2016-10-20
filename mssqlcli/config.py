@@ -52,9 +52,6 @@ class Config(object):
         return obj
 
     def get_username(self):
-        if self.windows_authentication:
+        if self.object.get('windows_authentication', False):
             return '\\'.join([self.domain, self.username])
-        return self.get_username
-
-    def __dict__(self):
-        return self.object
+        return self.username

@@ -1,0 +1,10 @@
+## This Config is totally bogus (Not suitable for use).
+## It is intended to test the forward looking portions
+## of the config code.
+
+keyring_app_name: mssqlcli_tests
+this_is_a_list:
+  - item_one
+  - item_two
+  - item_three
+  - USE_KEYRING("a_list_item")
