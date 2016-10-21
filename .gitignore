@@ -1,3 +1,6 @@
 build
 dist
 mssqlcli.egg-info
+.cache
+.coverage
+htmlcov
