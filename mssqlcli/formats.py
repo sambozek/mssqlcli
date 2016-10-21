@@ -18,7 +18,10 @@ import csv
 import json
 import datetime
 
-import StringIO
+try:
+    from StringIO import StringIO
+except ImportError:
+    from io import StringIO
 
 
 def stringify(obj):
@@ -40,7 +43,7 @@ def jsonify(obj):
     try:
         from pygments import highlight, lexers, formatters
         colorful_json = highlight(
-            unicode(formatted_json, 'UTF-8'),
+            formatted_json,
             lexers.JsonLexer(),
             formatters.TerminalFormatter()
         )
@@ -51,7 +54,7 @@ def jsonify(obj):
 
 
 def csvify(obj):
-    output = StringIO.StringIO()
+    output = StringIO()
     fieldnames = obj[0].keys()
     writer = csv.DictWriter(output, fieldnames=fieldnames)
 

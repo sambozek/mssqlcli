@@ -1,0 +1,5 @@
+keyring
+pymssql
+PyYAML
+pygments
+click
