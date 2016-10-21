@@ -1,0 +1,6 @@
+[run]
+omit=
+    *venv*
+    *tox*
+    *test_*
+    *virtualenv*

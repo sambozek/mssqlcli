@@ -20,7 +20,7 @@ import datetime
 
 try:
     from StringIO import StringIO
-except ImportError:
+except ImportError:  # pragma: nocover
     from io import StringIO
 
 
