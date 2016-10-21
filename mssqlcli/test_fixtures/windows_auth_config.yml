@@ -1,0 +1,4 @@
+username: a_user
+password: a_password
+windows_authentication: true
+domain: MY_DOMAIN
