@@ -75,7 +75,8 @@ setup(
         'pymssql',
         'PyYAML',
         'pygments',
-        'click'
+        'click',
+        'keyring'
     ],
 
     entry_points={

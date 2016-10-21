@@ -17,9 +17,9 @@
 import os
 import click
 import pymssql
-from config import Config
+from mssqlcli.config import Config
 
-import formats
+from mssqlcli import formats
 
 
 @click.group()
