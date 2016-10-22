@@ -1,3 +1,4 @@
+"""Python CLI for Microsoft SQL."""
 # Copyright (C) 2016 Russell Troxel
 
 # This program is free software: you can redistribute it and/or modify
@@ -13,18 +14,27 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from setuptools import setup
-
 import io
 
 from os import path
 
 import mssqlcli
 
+from setuptools import setup
+
 here = path.abspath(path.dirname(__file__))
 
 
 def read(*filenames, **kwargs):
+    """
+    Read file contents into string.
+
+    Used by setup.py to concatenate long_description.
+
+    :param string filenames: Files to be read and concatenated.
+    :rtype: string
+
+    """
     encoding = kwargs.get('encoding', 'utf-8')
     sep = kwargs.get('sep', '\n')
     buf = []
@@ -56,9 +66,9 @@ setup(
 
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
 
-	'Operating System :: MacOS :: MacOS X',
-	'Operating System :: Unix',
-	'Operating System :: POSIX',
+        'Operating System :: MacOS :: MacOS X',
+        'Operating System :: Unix',
+        'Operating System :: POSIX',
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3.5'
@@ -66,9 +76,9 @@ setup(
 
     keywords=['microsoft', 'sql', 'mssql'],
 
-    packages=["mssqlcli"],
+    packages=['mssqlcli'],
     package_dir={
-        "msssqlcli": "mssqlcli"
+        'msssqlcli': 'mssqlcli'
     },
 
     install_requires=[

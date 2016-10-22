@@ -1,3 +1,4 @@
+"""Python CLI for Microsoft SQL."""
 # Copyright (C) 2016 Russell Troxel
 
 # This program is free software: you can redistribute it and/or modify

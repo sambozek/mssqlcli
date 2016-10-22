@@ -15,16 +15,19 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import json
-import mock
+
 from click.testing import CliRunner
 
-from mssqlcli import test_fixtures
+import mock
+
 from mssqlcli import cli
+from mssqlcli import test_fixtures
 
 
 @mock.patch('pymssql.connect',
             side_effect=test_fixtures.MockPyMSSQLConnection)
 def test_query_basic(mock_connect):
+    """Test query with basic options (json)."""
     runner = CliRunner()
     with runner.isolated_filesystem():
         test_fixtures.populate_isolated_filesystem(
@@ -51,6 +54,7 @@ def test_query_basic(mock_connect):
 @mock.patch('pymssql.connect',
             side_effect=test_fixtures.MockPyMSSQLConnection)
 def test_query_csv(mock_connect):
+    """Test query with CSV output."""
     runner = CliRunner()
     with runner.isolated_filesystem():
         test_fixtures.populate_isolated_filesystem(
