@@ -76,7 +76,8 @@ setup(
         'PyYAML',
         'pygments',
         'click',
-        'keyring'
+        'keyring',
+        'prettytable'
     ],
 
     entry_points={

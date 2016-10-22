@@ -66,8 +66,16 @@ def csvify(obj):
     return out
 
 
+def pretty_print(obj):
+    from prettytable import PrettyTable
+    table = PrettyTable(obj[0].keys())
+    for row in obj:
+        table.add_row(row.values())
+    return table.get_string()
+
 
 FORMAT_OPTIONS = {
     "csv": csvify,
-    "json": jsonify
+    "json": jsonify,
+    "pretty": pretty_print
 }

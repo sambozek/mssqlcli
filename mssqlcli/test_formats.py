@@ -104,3 +104,34 @@ def test_csvify():
         }
     ]
     assert formats.csvify(obj) in expected_csv_outputs
+
+
+expected_pretty_print_output1 = ('+-------+----------------------------+\n'
+                                 '|  two  |            one             |\n'
+                                 '+-------+----------------------------+\n'
+                                 '|  blue |            red             |\n'
+                                 '| black | 2016-10-20 21:10:36.621341 |\n'
+                                 '+-------+----------------------------+')
+
+
+expected_pretty_print_output2 = ('+----------------------------+-------+\n'
+                                 '|            one             |  two  |\n'
+                                 '+----------------------------+-------+\n'
+                                 '|            red             |  blue |\n'
+                                 '| 2016-10-20 21:10:36.621341 | black |\n'
+                                 '+----------------------------+-------+')
+
+
+def test_pretty_print():
+    obj = [
+        {
+            "one": "red",
+            "two": "blue"
+        },
+        {
+            "one": datetime(2016, 10, 20, 21, 10, 36, 621341),
+            "two": "black"
+        }
+    ]
+    output = formats.pretty_print(obj)
+    assert output == expected_pretty_print_output1 or output == expected_pretty_print_output2

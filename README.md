@@ -58,7 +58,7 @@ Commands:
 Usage: mssqlcli query [OPTIONS] QUERY
 
 Options:
-  -o, --output [json|csv]
+  -o, --output [json|csv|pretty]
   -c, --config-file PATH   Config File for use with client. (default:
                            ~/.config/pymssql.yml)
   --help                   Show this message and exit.
@@ -85,6 +85,11 @@ mssqlcli query -o csv {path to query}.sql
 Redirect csv to File
 ```bash
 mssqlcli query -o csv {path to query}.sql > results.csv
+```
+
+Run query and return results as a nicely formatted table
+```bash
+mssqlcli query -o pretty {path to query}.sql
 ```
 
 [1]: http://www.freetds.org/
