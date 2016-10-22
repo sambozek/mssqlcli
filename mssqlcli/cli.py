@@ -16,27 +16,45 @@
 
 import os
 import click
-import pymssql
-from mssqlcli.config import Config
 
 from mssqlcli import formats
+from mssqlcli.config import Config
+
+import pymssql
 
 
 @click.group()
 def cli():
+    """Placeholder Function for click group."""
+    # RTrox: Currently there is only command. This layout is
+    # to allow forward compatibility once a `configure`
+    # option is added, as well as any other future commands
+    # that may be needed for MS-SQL Administration.
     pass
 
 
 @click.option("--config-file", "-c", type=click.Path(),
               default=os.path.expanduser("~/.config/mssqlcli.yml"),
-              help=("Config File for use with client."
-                    " (default: ~/.config/pymssql.yml)"))
+              help=("Override default config file location"
+                    " (default: ~/.config/pymssql.yml)."))
 @click.option("--output", "-o",
               type=click.Choice(formats.FORMAT_OPTIONS.keys()),
               default="json")
 @click.argument("query", type=click.File('r'))
 @cli.command()
 def query(config_file, output, query):
+    """
+    Run a query against an MS-SQL Database.
+
+    Config-file must be created before the query will succeed.
+    Example configs can be found in the README.md.
+
+    :param string config_file: path to config file. (yaml)
+    :param string output: output type. Choices: pretty,json,csv
+    :param string query: location of query file to be ran against the server.
+    :rtype: None
+
+    """
     query = query.read()
     config = Config(config_file)
     conn = pymssql.connect(

@@ -15,8 +15,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import csv
-import json
 import datetime
+import json
 
 try:
     from StringIO import StringIO
@@ -25,6 +25,14 @@ except ImportError:  # pragma: nocover
 
 
 def stringify(obj):
+    """
+    Convert json non-serializable objects to string.
+
+    Currently converts `datetime.datetime` objects.
+
+    :param dict,list obj: object to be prepared for serialization.
+    :rtype: dict,list
+    """
     if type(obj) == list:
         iterable = enumerate(obj)
     if type(obj) == dict:
@@ -38,6 +46,14 @@ def stringify(obj):
 
 
 def jsonify(obj):
+    """
+    Convert serializable object to string.
+
+    If Pygments is present, it will be used to colorify the json blob.
+    :param list[dict] obj: object to be serialized.
+    :returns: serialized json string.
+    :rtype: string
+    """
     formatted_json = json.dumps(stringify({"results": obj}), indent=4)
 
     try:
@@ -54,6 +70,13 @@ def jsonify(obj):
 
 
 def csvify(obj):
+    """
+    Serialize object to CSV.
+
+    :param list[dict] obj: list of dictionaries to be serialized.
+    :returns: CSV serialized string.
+    :rtype: string
+    """
     output = StringIO()
     fieldnames = obj[0].keys()
     writer = csv.DictWriter(output, fieldnames=fieldnames)
@@ -67,6 +90,13 @@ def csvify(obj):
 
 
 def pretty_print(obj):
+    """
+    Serialize object to a pretty table.
+
+    :param list[dict] obj: list of dictionaries to be serialized.
+    :returns: PrettyTable string.
+    :rtype: string
+    """
     from prettytable import PrettyTable
     table = PrettyTable(obj[0].keys())
     for row in obj:

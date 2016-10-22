@@ -35,6 +35,12 @@ def simple_keyring(app_name, key):
 
 
 def test_basic_config():
+    """
+    Test unmarshalling of a basic configuration file.
+
+    Should contain plaintext username, password, and server strings.
+    Config should apply these as attributes to itself.
+    """
     c = config.Config('mssqlcli/test_fixtures/basic_config.yml')
     assert c.object == {
         "username": "a_user",
@@ -48,6 +54,11 @@ def test_basic_config():
 
 @mock.patch('keyring.get_password', side_effect=simple_keyring)
 def test_config_keyring_support(mock_get_password):
+    """
+    Test the same basic config, but with retrieval of keyring items.
+
+    username and password should be stored in the simple_keyring construct.
+    """
     c = config.Config('mssqlcli/test_fixtures/basic_keyring_config.yml')
     assert c.object == {
         'keyring_app_name': 'mssqlcli_tests',
@@ -61,6 +72,11 @@ def test_config_keyring_support(mock_get_password):
 
 @mock.patch('keyring.get_password', side_effect=simple_keyring)
 def test_config_get_keyring_iteration(mock_get_password):
+    """
+    Test Nested keyring support.
+
+    Tests that keyring item inside a list is retrieved.
+    """
     c = config.Config('mssqlcli/test_fixtures/bogus_iterable_config.yml')
     assert c.object == {
         'keyring_app_name': 'mssqlcli_tests',
@@ -74,5 +90,6 @@ def test_config_get_keyring_iteration(mock_get_password):
 
 
 def test_config_windows_authentication():
+    """Test that windows auth properly returns a formatted domain username."""
     c = config.Config('mssqlcli/test_fixtures/windows_auth_config.yml')
     assert c.get_username() == "MY_DOMAIN\\a_user"

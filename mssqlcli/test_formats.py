@@ -14,14 +14,19 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import mock
-
 from datetime import datetime
+
+import mock
 
 from mssqlcli import formats
 
 
 def test_stringify_on_basic_dict():
+    """
+    Test Simple dictionary stringification.
+
+    `datetime.datetime should be converted to `str`.
+    """
     obj = {'now': datetime(2016, 10, 20, 21, 10, 36, 621341)}
     assert formats.stringify(obj) == {
         'now': '2016-10-20 21:10:36.621341'
@@ -29,6 +34,11 @@ def test_stringify_on_basic_dict():
 
 
 def test_stringify_on_basic_list():
+    """
+    Test Simple List stringification.
+
+    `datetime.datetime should be converted to `str`.
+    """
     obj = [datetime(2016, 10, 20, 21, 10, 36, 621341)]
     assert formats.stringify(obj) == [
         '2016-10-20 21:10:36.621341'
@@ -36,6 +46,12 @@ def test_stringify_on_basic_list():
 
 
 def test_stringify_on_nested_dict():
+    """
+    Test Stringification on nested dict.
+
+    Ensure `datetime.datetime` is still converted when it is not a
+    top level key.
+    """
     obj = {
         "top_level": {
             "now": datetime(2016, 10, 20, 21, 10, 36, 621341)
@@ -49,6 +65,7 @@ def test_stringify_on_nested_dict():
 
 
 def test_stringify_on_nested_list():
+    """Test that `datetime.datetime` is stringified when inside nested list."""
     obj = {'nows': [datetime(2016, 10, 20, 21, 10, 36, 621341)]}
     assert formats.stringify(obj) == {'nows': ['2016-10-20 21:10:36.621341']}
 
@@ -61,6 +78,7 @@ expected_plaintext_json_response = """{
 
 
 def test_jsonify_no_pygments():
+    """Test that jsonify returns string when pygments is not present."""
     obj = {'now': datetime(2016, 10, 20, 21, 10, 36, 621341)}
     with mock.patch.dict('sys.modules', {'pygments': None}):
         assert formats.jsonify(obj) == expected_plaintext_json_response
@@ -74,6 +92,7 @@ expected_pygments_json_response = (
 
 
 def test_jsonify_with_pygments():
+    """Test that json is properly colorified when pygments is present."""
     obj = {'now': datetime(2016, 10, 20, 21, 10, 36, 621341)}
     assert formats.jsonify(obj) == expected_pygments_json_response
 
@@ -93,6 +112,7 @@ expected_csv_outputs = [
 
 
 def test_csvify():
+    """Test that object is properly converted to CSV."""
     obj = [
         {
             "one": "red",
@@ -123,6 +143,7 @@ expected_pretty_print_output2 = ('+----------------------------+-------+\n'
 
 
 def test_pretty_print():
+    """Test that output is properly pretty printed from dictionary object."""
     obj = [
         {
             "one": "red",
@@ -134,4 +155,7 @@ def test_pretty_print():
         }
     ]
     output = formats.pretty_print(obj)
-    assert output == expected_pretty_print_output1 or output == expected_pretty_print_output2
+    assert output in [
+        expected_pretty_print_output1,
+        expected_pretty_print_output2
+    ]
