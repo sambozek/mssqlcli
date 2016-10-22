@@ -1,5 +1,9 @@
 # MS-SQL Command Line Interface (mssqlcli)
 
+[![PyPI](https://img.shields.io/pypi/v/nine.svg)](https://pypi.python.org/pypi/mssqlcli)
+[![Build Status](https://travis-ci.org/rtrox/mssqlcli.svg?branch=master)](https://travis-ci.org/rtrox/mssqlcli)
+[![Coverage Status](https://coveralls.io/repos/github/rtrox/mssqlcli/badge.svg?branch=master)](https://coveralls.io/github/rtrox/mssqlcli?branch=master)
+
 MS-SQL CLI is a unix command line tool for accessing and running arbitrary
 queries against an Microsoft SQL database.
 
