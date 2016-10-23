@@ -14,13 +14,14 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+
 import os
+
 import click
+import pymssql
 
 from mssqlcli import formats
 from mssqlcli.config import Config
-
-import pymssql
 
 
 @click.group()

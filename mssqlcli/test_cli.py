@@ -14,11 +14,12 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+
 import json
 
-from click.testing import CliRunner
-
 import mock
+
+from click.testing import CliRunner
 
 from mssqlcli import cli
 from mssqlcli import test_fixtures
