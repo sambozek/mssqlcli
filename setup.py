@@ -19,7 +19,7 @@ import sys
 
 from os import path
 
-import mssqlcli
+from mssqlcli import __version__
 
 from setuptools import setup
 from setuptools.command.test import test
@@ -74,7 +74,7 @@ def long_description():
 
 setup(
     name='mssqlcli',
-    version=mssqlcli.__version__,
+    version=__version__,
     description=('Python CLI for Microsoft SQL.'),
     long_description=long_description(),
 
@@ -86,7 +86,7 @@ setup(
     author_email='russelltroxel@gmail.com',
     license='GPLv3',
     classifiers=[
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
 
         'Intended Audience :: System Administrators',
 
