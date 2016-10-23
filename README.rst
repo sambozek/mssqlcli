@@ -110,9 +110,9 @@ Run query and return results as a nicely formatted table
 .. _FreeTDS: http://www.freetds.org/
 .. _A Bug in pymssql: https://github.com/pymssql/pymssql/issues/432
 
-.. |PyPI| image:: https://img.shields.io/pypi/v/nine.svg
+.. |PyPI| image:: https://img.shields.io/pypi/v/mssqlcli.svg
    :target: https://pypi.python.org/pypi/mssqlcli
-.. |Build Status| image:: https://travis-ci.org/rtrox/mssqlcli.svg?branch=master
+.. |Build Status| image:: https://img.shields.io/travis/rtrox/mssqlcli/master.svg
    :target: https://travis-ci.org/rtrox/mssqlcli
-.. |Coverage Status| image:: https://coveralls.io/repos/github/rtrox/mssqlcli/badge.svg?branch=master
+.. |Coverage Status| image:: https://img.shields.io/coveralls/rtrox/mssqlcli/master.svg
    :target: https://coveralls.io/github/rtrox/mssqlcli?branch=master
