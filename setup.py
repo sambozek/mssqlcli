@@ -43,12 +43,20 @@ def read(*filenames, **kwargs):
             buf.append(f.read())
     return sep.join(buf)
 
+
+def long_description():
+    long_description = ('Python CLI for Microsoft SQL.'),
+    for readme_path in ["README.rst", "README.txt"]:
+        if path.exists(readme_path):
+            return read(readme_path)
+    return long_description
+
+
 setup(
     name='mssqlcli',
     version=mssqlcli.__version__,
-    description=('Set Supernova Creds based on customer'
-                 'information. (DDI&Region or UUID)'),
-    long_description=read('README.txt'),
+    description=('Python CLI for Microsoft SQL.'),
+    long_description=long_description(),
 
     # The project's main homepage.
     url='https://github.com/rtrox/mssqlcli',
