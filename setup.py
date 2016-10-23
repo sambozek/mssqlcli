@@ -15,14 +15,33 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import io
+import sys
 
 from os import path
 
 import mssqlcli
 
 from setuptools import setup
+from setuptools.command.test import test
 
 here = path.abspath(path.dirname(__file__))
+
+
+class Tox(test):
+    """TestCommand to run ``tox`` via setup.py."""
+
+    def finalize_options(self):
+        """Finalize options from args."""
+        test.finalize_options(self)
+        self.test_args = []
+        self.test_suite = True
+
+    def run_tests(self):
+        """Actually Run Tests."""
+        # import here, cause outside the eggs aren't loaded
+        import tox
+        errcode = tox.cmdline(self.test_args)
+        sys.exit(errcode)
 
 
 def read(*filenames, **kwargs):
@@ -45,8 +64,9 @@ def read(*filenames, **kwargs):
 
 
 def long_description():
+    """Generate Long Description from available README files."""
     long_description = ('Python CLI for Microsoft SQL.'),
-    for readme_path in ["README.rst", "README.txt"]:
+    for readme_path in ["README.rst", "README.txt", "README.md"]:
         if path.exists(readme_path):
             return read(readme_path)
     return long_description
@@ -97,6 +117,8 @@ setup(
         'keyring',
         'prettytable'
     ],
+    tests_require=['tox'],
+    cmdclass={'test': Tox},
 
     entry_points={
         'console_scripts': [

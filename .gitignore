@@ -6,3 +6,4 @@ mssqlcli.egg-info
 htmlcov
 .tox
 __pycache__
+.eggs*
