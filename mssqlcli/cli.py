@@ -20,11 +20,12 @@ import os
 import click
 import pymssql
 
-from mssqlcli import formats
+from mssqlcli import __version__, formats
 from mssqlcli.config import Config
 
 
 @click.group()
+@click.version_option(__version__, prog_name=__doc__)
 def cli():
     """Placeholder Function for click group."""
     # RTrox: Currently there is only command. This layout is
