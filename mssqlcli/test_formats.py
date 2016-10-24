@@ -20,6 +20,8 @@ import mock
 
 from mssqlcli import formats
 
+from mssqlcli.test_fixtures import get_file_contents
+
 
 def test_stringify_on_basic_dict():
     """
@@ -126,22 +128,6 @@ def test_csvify():
     assert formats.csvify(obj) in expected_csv_outputs
 
 
-expected_pretty_print_output1 = ('+-------+----------------------------+\n'
-                                 '|  two  |            one             |\n'
-                                 '+-------+----------------------------+\n'
-                                 '|  blue |            red             |\n'
-                                 '| black | 2016-10-20 21:10:36.621341 |\n'
-                                 '+-------+----------------------------+')
-
-
-expected_pretty_print_output2 = ('+----------------------------+-------+\n'
-                                 '|            one             |  two  |\n'
-                                 '+----------------------------+-------+\n'
-                                 '|            red             |  blue |\n'
-                                 '| 2016-10-20 21:10:36.621341 | black |\n'
-                                 '+----------------------------+-------+')
-
-
 def test_pretty_print():
     """Test that output is properly pretty printed from dictionary object."""
     obj = [
@@ -156,6 +142,10 @@ def test_pretty_print():
     ]
     output = formats.pretty_print(obj)
     assert output in [
-        expected_pretty_print_output1,
-        expected_pretty_print_output2
+        get_file_contents(
+            'pretty_outputs/query_expected_pretty_output'
+        ).strip(),
+        get_file_contents(
+            'pretty_outputs/query_expected_pretty_output2'
+        ).strip()
     ]

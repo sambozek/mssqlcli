@@ -19,8 +19,8 @@ queries against an Microsoft SQL database.
     - Debian/Ubuntu: `sudo apt-get install freetds-dev`
     - Mac OSX: `brew install freetds`
 2. Install pymssql
-    - pip install git+https://github.com/pymssql/pymssql.git
-    - This is currently necessary due to [A Bug in pymssql][4].
+    - pip install -e git+https://github.com/pymssql/pymssql.git#egg=pymssql-2.1.2
+    - This is currently necessary due to [a bug in pymssql][4].
 3. Clone this repo locally
 4. Install client `python setup.py install`
 
@@ -50,7 +50,7 @@ domain: MY_DOMAIN
 
 ## Usage
 
-```
+```bash
 ~ [ mssqlcli --help Usage: mssqlcli [OPTIONS] COMMAND [ARGS]...
 
 Options:
@@ -66,7 +66,7 @@ Options:
   -c, --config-file PATH   Config File for use with client. (default:
                            ~/.config/pymssql.yml)
   --help                   Show this message and exit.
-  ```
+```
 
 
 ## Examples
