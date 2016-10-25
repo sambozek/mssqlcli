@@ -1,4 +1,4 @@
-"""MSSQL Cli Client written in python."""
+"""MS-SQL CLI: a Python command line interface for Microsoft SQL Server."""
 # Copyright (C) 2016 Russell Troxel
 
 # This program is free software: you can redistribute it and/or modify
@@ -18,23 +18,28 @@
 import os
 
 import click
-import pymssql
 
 from mssqlcli import __version__, formats
 from mssqlcli.config import Config
+from mssqlcli.drivers.mssql import execute_query
+
+
+def split_param(string, sep=":"):
+    """Split a key/value parameter by separator."""
+    split = string.split(sep)
+    for idx, item in enumerate(split):
+        split[idx] = item.strip()
+    return split
+
+
+def render_template(query, **kwargs):
+    """Helper function to render jinja templated queries."""
+    from jinja2 import Template
+    return Template(query.read()).render(**kwargs)
 
 
 @click.group()
-@click.version_option(__version__, prog_name=__doc__)
-def cli():
-    """Placeholder Function for click group."""
-    # RTrox: Currently there is only command. This layout is
-    # to allow forward compatibility once a `configure`
-    # option is added, as well as any other future commands
-    # that may be needed for MS-SQL Administration.
-    pass
-
-
+@click.version_option(__version__, prog_name=__doc__.strip("."))
 @click.option("--config-file", "-c", type=click.Path(),
               default=os.path.expanduser("~/.config/mssqlcli.yml"),
               help=("Override default config file location"
@@ -42,9 +47,24 @@ def cli():
 @click.option("--output", "-o",
               type=click.Choice(formats.FORMAT_OPTIONS.keys()),
               default="json")
+@click.pass_context
+def cli(ctx, config_file, output):
+    """Placeholder Function for click group."""
+    # RTrox: Currently there is only command. This layout is
+    # to allow forward compatibility once a `configure`
+    # option is added, as well as any other future commands
+    # that may be needed for MS-SQL Administration.
+    if ctx.obj is None:
+        ctx.obj = {}
+
+    ctx.obj['config'] = Config(config_file)
+    ctx.obj['output_formatter'] = formats.FORMAT_OPTIONS[output]
+
+
 @click.argument("query", type=click.File('r'))
 @cli.command()
-def query(config_file, output, query):
+@click.pass_context
+def query(ctx, query):
     """
     Run a query against an MS-SQL Database.
 
@@ -58,18 +78,30 @@ def query(config_file, output, query):
 
     """
     query = query.read()
-    config = Config(config_file)
-    conn = pymssql.connect(
-        config.server,
-        config.get_username(),
-        config.password
-    )
-    cursor = conn.cursor(as_dict=True)
-    cursor.execute(query)
 
-    results = [row for row in cursor]
+    results = execute_query(ctx.obj['config'], query)
+    output = ctx.obj['output_formatter'](results)
+    click.echo(output)
 
-    output = formats.FORMAT_OPTIONS[output](results)
+
+@click.option("--variable", "-v", multiple=True,
+              help=('Variable for substitution in template. ex:'
+                    '"-v first_name:russell" to replace {{ first_name }}')
+              )
+@click.argument("query", type=click.File('r'))
+@cli.command()
+@click.pass_context
+def template_query(ctx, variable, query):
+
+    kwargs = {}
+    for v in variable:
+        v = split_param(v)
+        kwargs[v[0]] = v[1]
+
+    query = render_template(query, **kwargs)
+
+    results = execute_query(ctx.obj['config'], query)
+    output = ctx.obj['output_formatter'](results)
     click.echo(output)
 
 

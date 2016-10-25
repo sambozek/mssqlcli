@@ -41,6 +41,18 @@ def populate_isolated_filesystem(configfile, queryfile):
         f.write(get_file_contents(queryfile))
 
 
+def mock_execute_query(config, query):
+    """
+    Mock the mssqlcli.drivers.mssql.execute_many method.
+
+    Executing a query will return a static result set.
+    """
+    return [
+        {"a": "one", "b": "two"},
+        {"a": "three", "b": datetime(2016, 10, 20, 21, 10, 36, 621341)}
+    ]
+
+
 class MockPyMSSQLCursor(object):
     """
     Mocks pymssql.Cursor.

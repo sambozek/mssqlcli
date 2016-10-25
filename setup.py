@@ -86,7 +86,7 @@ setup(
     author_email='russelltroxel@gmail.com',
     license='GPLv3',
     classifiers=[
-        'Development Status :: 5 - Production/Stable',
+        'Development Status :: 4 - Beta',
 
         'Intended Audience :: System Administrators',
 
@@ -115,9 +115,10 @@ setup(
         'pygments',
         'click',
         'keyring',
-        'prettytable'
+        'prettytable',
+        'jinja2'
     ],
-    tests_require=['tox'],
+    tests_require=['tox', 'virtualenv'],
     cmdclass={'test': Tox},
 
     entry_points={
