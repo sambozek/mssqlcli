@@ -46,7 +46,7 @@ def render_template(query, **kwargs):
                     " (default: ~/.config/pymssql.yml)."))
 @click.option("--output", "-o",
               type=click.Choice(formats.FORMAT_OPTIONS.keys()),
-              default="json")
+              default="pretty")
 @click.pass_context
 def cli(ctx, config_file, output):
     """Placeholder Function for click group."""

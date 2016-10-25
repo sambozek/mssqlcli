@@ -66,7 +66,7 @@ def test_render_template():
 
 @mock.patch('pymssql.connect',
             side_effect=test_fixtures.MockPyMSSQLConnection)
-def test_query_basic(mock_connect):
+def test_query_json(mock_connect):
     """Test query with basic options (json)."""
     runner = CliRunner()
     with runner.isolated_filesystem():
@@ -76,7 +76,7 @@ def test_query_basic(mock_connect):
         )
         result = runner.invoke(
             cli.cli,
-            ['-c', 'config.yml', 'query', 'query.sql']
+            ['-c', 'config.yml', '-o', 'json', 'query', 'query.sql']
         )
         assert result.exit_code == 0
         assert json.loads(result.output) == json.loads(
@@ -123,7 +123,7 @@ def test_query_csv(mock_connect):
 
 @mock.patch('pymssql.connect',
             side_effect=test_fixtures.MockPyMSSQLConnection)
-def test_query_pretty(mock_connect):
+def test_query_default(mock_connect):
     """Test query with Pretty output."""
     runner = CliRunner()
     with runner.isolated_filesystem():
@@ -133,7 +133,7 @@ def test_query_pretty(mock_connect):
         )
         result = runner.invoke(
             cli.cli,
-            ['-c', 'config.yml', '-o', 'pretty', 'query', 'query.sql']
+            ['-c', 'config.yml', 'query', 'query.sql']
         )
         assert result.exit_code == 0
         assert result.output in [
