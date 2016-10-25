@@ -15,15 +15,25 @@ queries against an Microsoft SQL database.
 
 
 ## Installation
+
 1. Install the FreeTDS Library
     - Debian/Ubuntu: `sudo apt-get install freetds-dev`
     - Mac OSX: `brew install freetds`
-2. Install pymssql
-    - pip install -e git+https://github.com/pymssql/pymssql.git#egg=pymssql-2.1.2
-    - This is currently necessary due to [a bug in pymssql][4].
-3. Clone this repo locally
-4. Install client `python setup.py install`
+2. Install mssqlcli
+    - `pip install mssqlcli`
+*OR*
+    -  Clone and  `python setup.py install`
 
+#### DB_VERSION_80 Errors during Installation (OS X)
+
+On Mac OS X, there is a bug with `pymssql` v2.1.2 which may cause this error:
+```bash
+error: use of undeclared identifier 'DBVERSION_80'
+```
+If you see this error, simply install the latest version of `pymssql` from git prior to installation of mssqlcli:
+```bash
+pip install -e git+https://github.com/pymssql/pymssql.git#egg=pymssql-2.1.2
+```
 
 
 ## Configuration
