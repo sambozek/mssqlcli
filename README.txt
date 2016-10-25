@@ -50,21 +50,34 @@ Usage
 -----
 ~ [ mssqlcli --help Usage: mssqlcli [OPTIONS] COMMAND [ARGS]...
 
+  Placeholder Function for click group.
+
 Options:
-  --help  Show this message and exit.
+  --version                       Show the version and exit.
+  -c, --config-file PATH          Override default config file location
+                                  (default: ~/.config/pymssql.yml).
+  -o, --output [json|csv|pretty]
+  --help                          Show this message and exit.
 
 Commands:
-  query
+  query           Run a query against an MS-SQL Database.
+  template_query
 
 
 ~ [ mssqlcli query --help
 Usage: mssqlcli query [OPTIONS] QUERY
 
 Options:
-  -o, --output [json|csv]
-  -c, --config-file PATH   Config File for use with client. (default:
-                           ~/.config/pymssql.yml)
   --help                   Show this message and exit.
+
+
+~ [ mssqlcli template_query --help
+Usage: mssqlcli template_query [OPTIONS] QUERY
+
+Options:
+  -v, --variable TEXT  Variable for substitution in template. ex:"-v
+                       first_name:russell" to replace {{ first_name }}
+  --help               Show this message and exit.
 
 
 Examples
@@ -78,6 +91,16 @@ mssqlcli query -o csv {path to query}.sql
 
 Redirect csv to File
 mssqlcli query -o csv {path to query}.sql > results.csv
+
+Send a template query to the server in file {path to query}.sql.
+mssqlcli template_query -v 'last_name: Ugur' {path to query}.sql
+
+Template Queries
+----------------
+
+An example of a templated SQL query is also given below. These are
+the kind of queries that can be used alongside template_query command.
+SELECT * FROM bogus_db.users WHERE last_name = "{{ last_name }}";
 
 [1]: http://www.freetds.org/
 [2]: http://pymssql.org/en/stable/
