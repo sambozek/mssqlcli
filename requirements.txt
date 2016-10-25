@@ -1,4 +1,4 @@
--e git+https://github.com/pymssql/pymssql.git#egg=pymssql-2.1.2
+# -e git+https://github.com/pymssql/pymssql.git#egg=pymssql-2.1.2
 keyring
 PyYAML
 pygments

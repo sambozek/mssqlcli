@@ -103,9 +103,10 @@ setup(
 
     keywords=['microsoft', 'sql', 'mssql'],
 
-    packages=['mssqlcli'],
-    package_dir={
-        'msssqlcli': 'mssqlcli'
+    packages=['mssqlcli', 'mssqlcli.drivers'],
+    package_dirs={
+        'mssqlcli': 'mssqlcli',
+        'mssqlcli.drivers': 'mssqlcli/drivers'
     },
 
     install_requires=[
