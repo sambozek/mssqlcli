@@ -75,7 +75,7 @@ setup(
     name='mssqlcli',
     version=__version__,
     description=('Python CLI for Microsoft SQL.'),
-    long_description=read("README.md"),
+    long_description=read("README.md", "CONTRIBUTING.md", "CHANGELOG.rst"),
 
     # The project's main homepage.
     url='https://github.com/rtrox/mssqlcli',
