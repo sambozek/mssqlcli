@@ -1,12 +1,36 @@
-v1.0.2 (unreleased)
-------------------------
+1.0.2 (2016-10-25)
+------------------
+
+New
+~~~
+
+- Add gitchangelog configuration, CONTRIBUTING.md. (#54) [Russell
+  Troxel]
+
+  - Adds a ``CONTRIBUTING.md`` File to provide guildelines around development and pull requests.
+  - Adds a .gitchangelog.rc file to start programmatically generating ``CHANGELOG.rst`` files for PyPI releases.
+
+Other
+~~~~~
+
+- Stage Release v1.0.2. [Russell Troxel]
 
 - Resolve mssql.drivers issue (#50) with setup.py. (#51) [Russell
-  Troxel]  
+  Troxel]
+
+  * Resolve mssql.drivers issue (#50) with setup.py.
+
+  * Resolve mssql.drivers issue (#50) with setup.py.
+
+  * Resolve mssql.drivers issue (#50) with setup.py.
 
 - Automate PanDoc conversion during registration. (#49) [Russell Troxel]
 
 - Update README files: usage and examples (#48) [İlim Uğur]
+
+  * Update readme files for the new usage.
+
+  * Add template_query command and fix minor prior issues from manual editing.
 
   * Add example usage of template_query and templated SQL query.
 
