@@ -58,25 +58,24 @@ def read(*filenames, **kwargs):
     sep = kwargs.get('sep', '\n')
     buf = []
     for filename in filenames:
+        if path.splitext(filename)[1] == ".md":
+            try:
+                import pypandoc
+                buf.append(pypandoc.convert_file(filename, 'rst'))
+                continue
+            except:
+                with io.open(filename, encoding=encoding) as f:
+                    buf.append(f.read())
         with io.open(filename, encoding=encoding) as f:
             buf.append(f.read())
     return sep.join(buf)
-
-
-def long_description():
-    """Generate Long Description from available README files."""
-    long_description = ('Python CLI for Microsoft SQL.'),
-    for readme_path in ["README.rst", "README.txt", "README.md"]:
-        if path.exists(readme_path):
-            return read(readme_path)
-    return long_description
 
 
 setup(
     name='mssqlcli',
     version=__version__,
     description=('Python CLI for Microsoft SQL.'),
-    long_description=long_description(),
+    long_description=read("README.md"),
 
     # The project's main homepage.
     url='https://github.com/rtrox/mssqlcli',
